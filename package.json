@@ -18,7 +18,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --fix",
     "format": "prettier . --write",
-    "prepare": "husky"
+    "prepare": "husky init"
   },
   "lint-staged": {
     "*.{js,jsx}": [
