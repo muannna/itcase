@@ -1,18 +1,26 @@
 import { useProducts } from '../../queries/products/useProducts'
-import { isProductInStock } from '../../utils/isProductInStock'
-import { getCheapestPrice } from '../../utils/getSortedAvailableColors'
 import { ProductCard } from './components/ProductCard'
 import { useSearchParams } from 'react-router-dom'
-import { useDebounce } from '../../hooks/useDebounce'
+import { selectVisibleProducts } from '../../app/store/selectors/products/selectVisibleProducts'
+import { useMemo } from 'react'
 
 export function ProductsPage() {
-  const { data: products, isLoading, error } = useProducts()
+  const { data: products = [], isLoading, error } = useProducts()
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const inStock = searchParams.get('inStock')
-  const search = searchParams.get('search') || ''
-  const debouncedSearch = useDebounce(search, 300)
-  const sort = searchParams.get('sort') || 'default'
+  const filters = useMemo(
+    () => ({
+      search: searchParams.get('search') || '',
+      inStock: searchParams.get('inStock') === 'true',
+      sort: searchParams.get('sort') || 'default',
+    }),
+    [searchParams],
+  )
+
+  const sortedProducts = useMemo(
+    () => selectVisibleProducts(products, filters),
+    [products, filters],
+  )
 
   if (isLoading) {
     return <p>Loading products...</p>
@@ -31,34 +39,12 @@ export function ProductsPage() {
     )
   }
 
-  const filteredProductes = products
-    .filter((product) => {
-      if (!inStock) return true
-
-      return isProductInStock(product)
-    })
-    .filter((product) => {
-      if (!debouncedSearch) return true
-
-      return product.name.toLowerCase().includes(debouncedSearch.toLowerCase())
-    })
-
-  const sortedProducts = [...filteredProductes].sort((a, b) => {
-    if (sort === 'price-asc') {
-      return getCheapestPrice(a.colors) - getCheapestPrice(b.colors)
-    } else if (sort === 'price-desc') {
-      return getCheapestPrice(b.colors) - getCheapestPrice(a.colors)
-    } else {
-      return 0
-    }
-  })
-
   return (
     <div>
       <input
         type="text"
         placeholder="Search products..."
-        value={search}
+        value={filters.search}
         onChange={(e) => {
           const params = new URLSearchParams(searchParams)
           if (e.target.value) {
@@ -70,7 +56,7 @@ export function ProductsPage() {
         }}
       />
       <select
-        value={sort}
+        value={filters.sort}
         onChange={(e) => {
           const params = new URLSearchParams(searchParams)
           if (e.target.value === 'default') {
@@ -88,7 +74,7 @@ export function ProductsPage() {
       <label>
         <input
           type="checkbox"
-          checked={inStock === 'true'}
+          checked={filters.inStock}
           onChange={(e) => {
             const params = new URLSearchParams(searchParams)
             if (e.target.checked) {
