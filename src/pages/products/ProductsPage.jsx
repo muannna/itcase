@@ -1,5 +1,6 @@
 import { useProducts } from '../../queries/products/useProducts'
 import { isProductInStock } from '../../utils/isProductInStock'
+import { getCheapestPrice } from '../../utils/getSortedAvailableColors'
 import { ProductCard } from './components/ProductCard'
 import { useSearchParams } from 'react-router-dom'
 import { useDebounce } from '../../hooks/useDebounce'
@@ -11,6 +12,7 @@ export function ProductsPage() {
   const inStock = searchParams.get('inStock')
   const search = searchParams.get('search') || ''
   const debouncedSearch = useDebounce(search, 300)
+  const sort = searchParams.get('sort') || 'default'
 
   if (isLoading) {
     return <p>Loading products...</p>
@@ -41,6 +43,16 @@ export function ProductsPage() {
       return product.name.toLowerCase().includes(debouncedSearch.toLowerCase())
     })
 
+  const sortedProducts = [...filteredProductes].sort((a, b) => {
+    if (sort === 'price-asc') {
+      return getCheapestPrice(a.colors) - getCheapestPrice(b.colors)
+    } else if (sort === 'price-desc') {
+      return getCheapestPrice(b.colors) - getCheapestPrice(a.colors)
+    } else {
+      return 0
+    }
+  })
+
   return (
     <div>
       <input
@@ -57,6 +69,22 @@ export function ProductsPage() {
           setSearchParams(params)
         }}
       />
+      <select
+        value={sort}
+        onChange={(e) => {
+          const params = new URLSearchParams(searchParams)
+          if (e.target.value === 'default') {
+            params.delete('sort')
+          } else {
+            params.set('sort', e.target.value)
+          }
+          setSearchParams(params)
+        }}
+      >
+        <option value="default">Default</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+      </select>
       <label>
         <input
           type="checkbox"
@@ -76,7 +104,7 @@ export function ProductsPage() {
       <div>
         <h1>Products</h1>
         <div>
-          {filteredProductes.map((product) => (
+          {sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { getCheapestColor } from '../../../utils/getCheapestColor'
+import { getCheapestColor } from '../../../utils/getSortedAvailableColors'
 import { formatPrice } from '../../../utils/formatPrice'
 
 export const ProductCard = ({ product }) => {
