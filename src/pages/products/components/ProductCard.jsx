@@ -1,0 +1,16 @@
+import { Link } from 'react-router-dom'
+import { getCheapestColor } from '../../../utils/getCheapestColor'
+import { formatPrice } from '../../../utils/formatPrice'
+
+export const ProductCard = ({ product }) => {
+  const cheapestColor = getCheapestColor(product.colors)
+
+  return (
+    <Link to={`/product/${product.id}`}>
+      <img src={cheapestColor.images[0]} alt={product.name} width={200} height={200} />
+      <p>Price: {formatPrice(cheapestColor.price)}</p>
+      <h3>{product.name}</h3>
+      <p>{product.brand}</p>
+    </Link>
+  )
+}
