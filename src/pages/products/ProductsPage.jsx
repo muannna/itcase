@@ -2,12 +2,15 @@ import { useProducts } from '../../queries/products/useProducts'
 import { isProductInStock } from '../../utils/isProductInStock'
 import { ProductCard } from './components/ProductCard'
 import { useSearchParams } from 'react-router-dom'
+import { useDebounce } from '../../hooks/useDebounce'
 
 export function ProductsPage() {
   const { data: products, isLoading, error } = useProducts()
   const [searchParams, setSearchParams] = useSearchParams()
 
   const inStock = searchParams.get('inStock')
+  const search = searchParams.get('search') || ''
+  const debouncedSearch = useDebounce(search, 300)
 
   if (isLoading) {
     return <p>Loading products...</p>
@@ -26,14 +29,34 @@ export function ProductsPage() {
     )
   }
 
-  const filteredProductes = products.filter((product) => {
-    if (!inStock) return true
+  const filteredProductes = products
+    .filter((product) => {
+      if (!inStock) return true
 
-    return isProductInStock(product)
-  })
+      return isProductInStock(product)
+    })
+    .filter((product) => {
+      if (!debouncedSearch) return true
+
+      return product.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+    })
 
   return (
-    <>
+    <div>
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={search}
+        onChange={(e) => {
+          const params = new URLSearchParams(searchParams)
+          if (e.target.value) {
+            params.set('search', e.target.value)
+          } else {
+            params.delete('search')
+          }
+          setSearchParams(params)
+        }}
+      />
       <label>
         <input
           type="checkbox"
@@ -58,6 +81,6 @@ export function ProductsPage() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
