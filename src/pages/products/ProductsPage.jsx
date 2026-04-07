@@ -5,6 +5,7 @@ import { selectVisibleProducts } from '../../app/store/selectors/products/select
 import { useFilters } from '../../hooks/useFilters'
 import { Loader } from '../../shared/ui/loader/Loader'
 import { Error } from '../../shared/ui/error/Error'
+import { EmptyState } from '../../shared/ui/emptyState/EmptyState'
 
 export function ProductsPage() {
   const { data: products = [], isLoading, error } = useProducts()
@@ -12,7 +13,7 @@ export function ProductsPage() {
 
   const sortedProducts = selectVisibleProducts(products, filters)
   const hasProducts = products && products.length > 0
-  const hasFilteredProducts = sortedProducts && sortedProducts.length > 0
+  const hasSortedProducts = sortedProducts && sortedProducts.length > 0
   const canShowFilters = !error
 
   let content = null
@@ -22,10 +23,10 @@ export function ProductsPage() {
   } else if (error) {
     content = <Error error={error} message="Error loading products" />
   } else if (!hasProducts) {
-    content = <p>No products available.</p>
+    content = <EmptyState text="No products available." />
   } else {
-    content = !hasFilteredProducts ? (
-      <p>No products match the current filters.</p>
+    content = !hasSortedProducts ? (
+      <EmptyState text="No products match the current filters." />
     ) : (
       <ProductsList products={sortedProducts} />
     )
