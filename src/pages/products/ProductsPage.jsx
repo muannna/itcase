@@ -9,6 +9,7 @@ export function ProductsPage() {
   const { filters, updateFilter } = useFilters()
 
   const sortedProducts = selectVisibleProducts(products, filters)
+  const hasFilteredProducts = sortedProducts && sortedProducts.length > 0
 
   if (isLoading) {
     return <p>Loading products...</p>
@@ -32,7 +33,11 @@ export function ProductsPage() {
       <Filters filters={filters} updateFilter={updateFilter} />
       <div>
         <h1>Products</h1>
-        <ProductsList products={sortedProducts} />
+        {!hasFilteredProducts ? (
+          <p>No products match the current filters.</p>
+        ) : (
+          <ProductsList products={sortedProducts} />
+        )}
       </div>
     </div>
   )
