@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { getCheapestColor } from '../../../utils/getSortedAvailableColors'
 import { formatPrice } from '../../../utils/formatPrice'
+import { memo } from 'react'
 
-export const ProductCard = ({ product }) => {
+const ProductCardComponent = ({ product }) => {
   const cheapestColor = getCheapestColor(product.colors)
 
   return (
@@ -14,3 +15,5 @@ export const ProductCard = ({ product }) => {
     </Link>
   )
 }
+
+export const ProductCard = memo(ProductCardComponent)

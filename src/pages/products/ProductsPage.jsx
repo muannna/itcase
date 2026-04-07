@@ -2,25 +2,18 @@ import { useProducts } from '../../queries/products/useProducts'
 import { ProductCard } from './components/ProductCard'
 import { useSearchParams } from 'react-router-dom'
 import { selectVisibleProducts } from '../../app/store/selectors/products/selectVisibleProducts'
-import { useMemo } from 'react'
 
 export function ProductsPage() {
   const { data: products = [], isLoading, error } = useProducts()
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const filters = useMemo(
-    () => ({
-      search: searchParams.get('search') || '',
-      inStock: searchParams.get('inStock') === 'true',
-      sort: searchParams.get('sort') || 'default',
-    }),
-    [searchParams],
-  )
+  const filters = {
+    search: searchParams.get('search') || '',
+    inStock: searchParams.get('inStock') === 'true',
+    sort: searchParams.get('sort') || 'default',
+  }
 
-  const sortedProducts = useMemo(
-    () => selectVisibleProducts(products, filters),
-    [products, filters],
-  )
+  const sortedProducts = selectVisibleProducts(products, filters)
 
   if (isLoading) {
     return <p>Loading products...</p>
