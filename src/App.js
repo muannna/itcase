@@ -1,9 +1,9 @@
-import React from 'react'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './app/router'
 import { Provider } from 'react-redux'
 import { store } from './app/store/store'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ThemeProvider } from './app/theme/ThemeProvider'
 
 const queryClient = new QueryClient()
 
@@ -11,7 +11,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </QueryClientProvider>
     </Provider>
   )

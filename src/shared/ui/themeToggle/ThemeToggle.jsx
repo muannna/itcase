@@ -1,8 +1,10 @@
-import { useTheme } from '../../../hooks/useTheme'
+import { useTheme } from '../../../app/theme/ThemeProvider'
+
 import styles from './ThemeToggle.module.css'
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
+
   const isDark = theme === 'dark'
 
   return (
