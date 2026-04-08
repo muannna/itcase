@@ -19,5 +19,9 @@ export function useFilters() {
     setSearchParams(newParams)
   }
 
-  return { filters, updateFilter }
+  const resetFilters = () => {
+    setSearchParams({})
+  }
+
+  return { filters, updateFilter, resetFilters }
 }

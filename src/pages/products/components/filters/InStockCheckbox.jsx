@@ -1,8 +1,14 @@
 export function InStockCheckbox({ checked, onChange }) {
   return (
-    <label>
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} />
-      In Stock Only
-    </label>
+    <>
+      <input
+        id="in-stock"
+        name="inStock"
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+      <label htmlFor="in-stock">In Stock Only</label>
+    </>
   )
 }
