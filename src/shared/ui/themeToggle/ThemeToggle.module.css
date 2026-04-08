@@ -1,0 +1,33 @@
+.switch {
+  width: 42px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  position: relative;
+  background: #d1d5db;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dark {
+  background: var(--color-bg);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.slider {
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dark .slider {
+  transform: translateX(20px);
+}

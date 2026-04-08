@@ -1,0 +1,12 @@
+:root {
+  --color-primary: #ffffff;
+  --color-bg: #d1d5db;
+  --color-text: #000000;
+  --font-main: Inter, system-ui, sans-serif;
+}
+
+[data-theme='dark'] {
+  --color-primary: #000000;
+  --color-bg: #2d2d2d;
+  --color-text: #d1d5db;
+}
