@@ -1,4 +1,5 @@
 import { useFilters } from '../../../../hooks/useFilters'
+import { Button } from '../../../../shared/ui/button/Button'
 
 export function ResetFiltersButton() {
   const { filters, resetFilters } = useFilters()
@@ -6,8 +7,8 @@ export function ResetFiltersButton() {
   const isDefault = filters.search === '' && filters.sort === 'default' && filters.inStock === false
 
   return (
-    <button onClick={resetFilters} disabled={isDefault}>
+    <Button onClick={resetFilters} disabled={isDefault}>
       Clear filters
-    </button>
+    </Button>
   )
 }
