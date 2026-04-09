@@ -5,20 +5,21 @@ import styles from './Layout.module.css'
 
 export function Layout() {
   return (
-    <div>
-      <nav className={styles.nav}>
-        <div className={styles.left}>
-          <Link className={styles.homeLink} to="/">
-            Products
-          </Link>
-        </div>
-
-        <div className={styles.right}>
-          <ThemeToggle />
-          <Link to="/cart">Cart</Link>
-        </div>
-      </nav>
-      <main>
+    <div className={styles.wrapper}>
+      <div className={styles.navWrapper}>
+        <nav className={styles.nav}>
+          <div className={styles.left}>
+            <Link className={styles.homeLink} to="/">
+              Products
+            </Link>
+          </div>
+          <div className={styles.right}>
+            <ThemeToggle />
+            <Link to="/cart">Cart</Link>
+          </div>
+        </nav>
+      </div>
+      <main className={styles.main}>
         <Outlet />
       </main>
     </div>
