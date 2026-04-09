@@ -7,6 +7,8 @@ import { Loader } from '../../shared/ui/loader/Loader'
 import { Error } from '../../shared/ui/error/Error'
 import { EmptyState } from '../../shared/ui/emptyState/EmptyState'
 
+import styles from './ProductsPage.module.css'
+
 export function ProductsPage() {
   const { data: products = [], isLoading, error } = useProducts()
   const { filters, updateFilter } = useFilters()
@@ -33,9 +35,9 @@ export function ProductsPage() {
   }
 
   return (
-    <div>
+    <div className={styles.page}>
       {canShowFilters && <Filters filters={filters} updateFilter={updateFilter} />}
-      <h1>Products</h1>
+      <h1 className={styles.title}>Products</h1>
       {content}
     </div>
   )

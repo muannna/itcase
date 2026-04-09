@@ -1,3 +1,5 @@
+import styles from './EmptyState.module.css'
+
 export function EmptyState({ text = 'Nothing found' }) {
-  return <p>{text}</p>
+  return <p className={styles.emptyState}>{text}</p>
 }
