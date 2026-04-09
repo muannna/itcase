@@ -1,5 +1,5 @@
 import { useProducts } from '../../queries/products/useProducts'
-import { ProductsList } from './components/products/ProductsList'
+import { ProductsList } from './components/products/ProductsList/ProductsList'
 import { Filters } from './components/filters/Filters'
 import { selectVisibleProducts } from '../../app/store/selectors/products/selectVisibleProducts'
 import { useFilters } from '../../hooks/useFilters'

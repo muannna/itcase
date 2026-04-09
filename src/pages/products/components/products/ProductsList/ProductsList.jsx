@@ -1,4 +1,4 @@
-import { ProductCard } from './ProductCard'
+import { ProductCard } from '../ProductCard/ProductCard'
 
 export function ProductsList({ products }) {
   return (

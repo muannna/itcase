@@ -1,7 +1,7 @@
-import { SearchInput } from './SearchInput'
-import { SortSelect } from './SortSelect'
-import { InStockCheckbox } from './InStockCheckbox'
-import { ResetFiltersButton } from './ResetFiltersButton'
+import { SearchInput } from './SearchInput/SearchInput'
+import { SortSelect } from './SortSelect/SortSelect'
+import { InStockCheckbox } from './InStockCheckbox/InStockCheckbox'
+import { ResetFiltersButton } from './ResetFiltersButton/ResetFiltersButton'
 
 export function Filters({ filters, updateFilter }) {
   return (
