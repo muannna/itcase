@@ -1,33 +1,15 @@
-import { useSearchParams } from 'react-router-dom'
-import { useEffect } from 'react'
-import { getCheapestColor } from '../../../../utils/getSortedAvailableColors'
 import { useCategory } from '../../../../queries/categories/useCategory'
 import { useSizes } from '../../../../queries/sizes/useSizes'
+import { useProductParams } from '../../../../hooks/useProductParams'
 import { formatPrice } from '../../../../utils/formatPrice'
 import { Button } from '../../../../shared/ui/button/Button'
 
 export function ProductCard({ product }) {
-  const [searchParams, setSearchParams] = useSearchParams()
   const { data: category } = useCategory(product.categoryId)
   const { data: sizes = [] } = useSizes()
-  const colorId = Number(searchParams.get('color'))
-  const sizeId = Number(searchParams.get('size'))
-  const cheapestColor = getCheapestColor(product.colors)
+  const { selectedColor, selectedSize, setColor, setSize } = useProductParams(product)
 
-  const selectedColor = product.colors.find((color) => color.id === colorId) ?? cheapestColor
-  const selectedSize = sizeId
   const availableSizes = new Set(selectedColor.sizes)
-
-  useEffect(() => {
-    const colorFromUrl = searchParams.get('color')
-    const isValidColor = product.colors.some((color) => color.id === Number(colorFromUrl))
-
-    if (!colorFromUrl || !isValidColor) {
-      const newParams = new URLSearchParams(searchParams)
-      newParams.set('color', cheapestColor.id)
-      setSearchParams(newParams, { replace: true })
-    }
-  }, [product.colors, cheapestColor.id, searchParams, setSearchParams])
 
   return (
     <div>
@@ -43,12 +25,7 @@ export function ProductCard({ product }) {
             {product.colors.map((color) => (
               <Button
                 key={color.id}
-                onClick={() => {
-                  const newParams = new URLSearchParams(searchParams)
-                  newParams.set('color', color.id)
-                  newParams.delete('size')
-                  setSearchParams(newParams)
-                }}
+                onClick={() => setColor(color.id)}
                 style={{
                   fontWeight: color.id === selectedColor.id ? 'bold' : 'normal',
                 }}
@@ -65,9 +42,7 @@ export function ProductCard({ product }) {
                   key={size.id}
                   onClick={() => {
                     if (!isAvailable) return
-                    const newParams = new URLSearchParams(searchParams)
-                    newParams.set('size', size.id)
-                    setSearchParams(newParams)
+                    setSize(size.id)
                   }}
                   style={{
                     opacity: isAvailable ? 1 : 0.3,
