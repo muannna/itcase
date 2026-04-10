@@ -16,11 +16,11 @@ export function useFilters() {
     } else {
       newParams.set(key, value)
     }
-    setSearchParams(newParams)
+    setSearchParams(newParams, { replace: true })
   }
 
   const resetFilters = () => {
-    setSearchParams({})
+    setSearchParams({}, { replace: true })
   }
 
   return { filters, updateFilter, resetFilters }
