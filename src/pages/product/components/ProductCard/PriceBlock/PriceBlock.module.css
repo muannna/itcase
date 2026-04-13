@@ -7,6 +7,17 @@
   font-size: 22px;
   font-weight: 700;
   padding-top: 10px;
-  padding-bottom: 20px;
   color: var(--color-accent-second);
+}
+
+.error {
+  color: var(--color-red);
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  min-height: 16px;
+}
+
+.visible {
+  opacity: 1;
 }

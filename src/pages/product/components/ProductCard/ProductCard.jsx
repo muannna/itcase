@@ -27,7 +27,11 @@ export function ProductCard({ product, category, sizes }) {
           />
           <ProductInfo category={category} selectedColor={selectedColor} />
         </div>
-        <PriceBlock selectedColor={selectedColor} />
+        <PriceBlock
+          selectedColor={selectedColor}
+          selectedSize={selectedSize}
+          availableSizes={availableSizes}
+        />
       </div>
     </div>
   )
