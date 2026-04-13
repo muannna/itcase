@@ -14,7 +14,7 @@ export function ProductCard({ product, category, sizes }) {
 
   return (
     <div className={styles.productCard}>
-      <ProductMedia selectedColor={selectedColor} product={product} />
+      <ProductMedia images={selectedColor.images} name={product.name} />
       <div className={styles.card}>
         <div className={styles.cardMain}>
           <CardTitle product={product} />

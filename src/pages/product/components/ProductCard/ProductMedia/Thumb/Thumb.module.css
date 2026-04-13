@@ -1,0 +1,20 @@
+.thumb {
+  display: flex;
+  justify-content: center;
+  border: 2px solid transparent;
+  padding: 2px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--color-background);
+}
+
+.thumbImg {
+  width: 40px;
+  height: 50px;
+  border-radius: 4px;
+}
+
+.active {
+  border-color: var(--color-accent);
+  cursor: default;
+}
