@@ -25,7 +25,6 @@ export function useProductParams(product) {
   const setColor = (colorId) => {
     updateParams((newParams) => {
       newParams.set('color', colorId)
-      newParams.delete('size')
     })
   }
 
