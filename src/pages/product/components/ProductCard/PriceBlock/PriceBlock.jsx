@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { formatPrice } from '../../../../../utils/formatPrice'
 import { Button } from '../../../../../shared/ui/button/Button'
 
@@ -6,6 +6,11 @@ import styles from './PriceBlock.module.css'
 
 export function PriceBlock({ selectedColor, selectedSize, availableSizes }) {
   const [touched, setTouched] = useState(false)
+
+  useEffect(() => {
+    setTouched(false)
+  }, [selectedColor, selectedSize])
+
   const addToCart = () => {
     setTouched(true)
     if (!selectedSize) return
