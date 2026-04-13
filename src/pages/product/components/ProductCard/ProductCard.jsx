@@ -1,22 +1,23 @@
 import { useProductParams } from '../../../../hooks/useProductParams'
 import { ProductMedia } from './ProductMedia/ProductMedia'
+import { CardTitle } from './CardTitle/CardTitle'
 import { ColorSelector } from './ColorSelector/ColorSelector'
 import { SizeSelector } from './SizeSelector/SizeSelector'
 import { ProductInfo } from './ProductInfo/ProductInfo'
 import { PriceBlock } from './PriceBlock/PriceBlock'
+
+import styles from './ProductCard.module.css'
 
 export function ProductCard({ product, category, sizes }) {
   const { selectedColor, selectedSize, setColor, setSize } = useProductParams(product)
   const availableSizes = new Set(selectedColor.sizes)
 
   return (
-    <div>
+    <div className={styles.productCard}>
       <ProductMedia selectedColor={selectedColor} product={product} />
-      <div>
-        <div>
-          <h1>
-            {product.name} {product.brand}
-          </h1>
+      <div className={styles.card}>
+        <div className={styles.cardMain}>
+          <CardTitle product={product} />
           <ColorSelector product={product} setColor={setColor} selectedColor={selectedColor} />
           <SizeSelector
             sizes={sizes}

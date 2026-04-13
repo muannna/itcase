@@ -1,0 +1,12 @@
+.priceBlock {
+  margin-top: 20px;
+  border-top: 1px solid var(--color-text);
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 700;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  color: var(--color-accent-second);
+}

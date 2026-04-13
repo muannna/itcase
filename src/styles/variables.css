@@ -14,7 +14,7 @@
   --color-box-shadow: rgba(0, 0, 0, 0.2);
   --color-black01: rgba(0, 0, 0, 0.1);
   --color-black06: rgba(0, 0, 0, 0.06);
-  --font-main: Inter, system-ui, sans-serif Arial;
+  --font-main: 'Inter';
 }
 
 [data-theme='dark'] {
