@@ -1,4 +1,4 @@
-import { isProductInStock } from '../../../../utils/isProductInStock'
+import { isProductInStock } from '../isProductInStock'
 
 export const selectFilteredProducts = (products, filters) => {
   return products

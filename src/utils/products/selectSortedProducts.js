@@ -1,4 +1,4 @@
-import { getCheapestPrice } from '../../../../utils/getSortedAvailableColors'
+import { getCheapestPrice } from '../getSortedAvailableColors'
 
 export const selectSortedProducts = (products, filters) => {
   const { sort } = filters
