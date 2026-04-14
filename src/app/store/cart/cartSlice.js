@@ -1,16 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-const loadCart = () => {
-  try {
-    return JSON.parse(localStorage.getItem('cart')) || []
-  } catch (error) {
-    return []
-  }
-}
-
-const saveCart = (cart) => {
-  localStorage.setItem('cart', JSON.stringify(cart))
-}
+import { loadCart } from './cartStorage'
 
 const initialState = {
   items: loadCart(),
@@ -35,17 +24,14 @@ const cartSlice = createSlice({
           quantity: 1,
         })
       }
-      saveCart(state.items)
     },
 
     removeItem: (state, action) => {
       state.items.filter((el) => el.id !== action.payload)
-      saveCart(state.items)
     },
 
     clearCart: (state) => {
       state.items = []
-      saveCart([])
     },
   },
 })
