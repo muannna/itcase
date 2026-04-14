@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useProductParams } from '../../../../hooks/useProductParams'
 import { ProductMedia } from './ProductMedia/ProductMedia'
 import { CardTitle } from './CardTitle/CardTitle'
@@ -10,7 +11,7 @@ import styles from './ProductCard.module.css'
 
 export function ProductCard({ product, category, sizes }) {
   const { selectedColor, selectedSize, setColor, setSize } = useProductParams(product)
-  const availableSizes = new Set(selectedColor.sizes)
+  const availableSizes = useMemo(() => new Set(selectedColor.sizes), [selectedColor])
 
   return (
     <div className={styles.productCard}>
