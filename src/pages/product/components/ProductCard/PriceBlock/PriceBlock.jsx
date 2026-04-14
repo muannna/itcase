@@ -26,6 +26,7 @@ export function PriceBlock({ selectedColor, selectedSize, availableSizes, produc
         sizeId: selectedSize,
         priceAtAdd: selectedColor.price,
         productName: product.name,
+        productBrand: product.brand,
         image: selectedColor.images[0],
       }),
     )
