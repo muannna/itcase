@@ -32,6 +32,7 @@ export function ProductCard({ product, category, sizes }) {
           selectedColor={selectedColor}
           selectedSize={selectedSize}
           availableSizes={availableSizes}
+          productId={product.id}
         />
       </div>
     </div>
