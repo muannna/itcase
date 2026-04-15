@@ -1,4 +1,4 @@
-import { Button } from '../../../../../shared/ui/button/Button'
+import { Button } from '../../../../shared/ui/button/Button'
 
 import styles from './ColorSelector.module.css'
 

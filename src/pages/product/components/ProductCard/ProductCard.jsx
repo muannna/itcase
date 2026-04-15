@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { useProductParams } from '../../../../hooks/useProductParams'
-import { ProductMedia } from './ProductMedia/ProductMedia'
-import { CardTitle } from './CardTitle/CardTitle'
-import { ColorSelector } from './ColorSelector/ColorSelector'
-import { SizeSelector } from './SizeSelector/SizeSelector'
-import { ProductInfo } from './ProductInfo/ProductInfo'
-import { PriceBlock } from './PriceBlock/PriceBlock'
+import { ProductMedia } from '../ProductMedia/ProductMedia'
+import { CardTitle } from '../CardTitle/CardTitle'
+import { ColorSelector } from '../ColorSelector/ColorSelector'
+import { SizeSelector } from '../SizeSelector/SizeSelector'
+import { ProductInfo } from '../ProductInfo/ProductInfo'
+import { PriceBlock } from '../PriceBlock/PriceBlock'
 
 import styles from './ProductCard.module.css'
 

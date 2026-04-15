@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { formatPrice } from '../../../../../utils/formatPrice'
-import { Button } from '../../../../../shared/ui/button/Button'
-import { addItem } from '../../../../../app/store/cart/cartSlice'
+import { formatPrice } from '../../../../utils/formatPrice'
+import { Button } from '../../../../shared/ui/button/Button'
+import { addItem } from '../../../../app/store/cart/cartSlice'
 
 import styles from './PriceBlock.module.css'
 
