@@ -16,3 +16,6 @@ export const decreaseQuantityHelper = (item) => {
   if (item.quantity <= 1) return
   item.quantity -= 1
 }
+
+export const findItemInCartHelper = (cart, { productId, colorId, sizeId }) =>
+  cart.find((i) => i.productId === productId && i.colorId === colorId && i.sizeId === sizeId)

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { formatPrice } from '../../../../utils/formatPrice'
 import { useCartActions } from '../../../../hooks/cart/useCartActions'
 import { CardActions } from '../CardActions/CardActions'
+import { useCartItem } from '../../../../hooks/cart/useCartItem.js'
 
 import styles from './PriceBlock.module.css'
 
@@ -9,6 +10,11 @@ export function PriceBlock({ selectedColor, selectedSize, availableSizes, produc
   const [touched, setTouched] = useState(false)
   const { addToCart, addFakeToCart } = useCartActions()
   const formatedPrice = formatPrice(selectedColor.price)
+  const { isInCart, quantity } = useCartItem({
+    productId: product.id,
+    colorId: selectedColor.id,
+    sizeId: selectedSize,
+  })
 
   const handleAdd = () =>
     addToCart({
@@ -28,7 +34,13 @@ export function PriceBlock({ selectedColor, selectedSize, availableSizes, produc
       <p className={`${styles.error} ${touched && !selectedSize ? styles.visible : ''}`}>
         Please select size
       </p>
-      <CardActions onAdd={handleAdd} onAddFake={addFakeToCart} disabled={!availableSizes.size} />
+      <CardActions
+        onAdd={handleAdd}
+        onAddFake={addFakeToCart}
+        disabled={!availableSizes.size}
+        isInCart={isInCart}
+        quantity={quantity}
+      />
     </div>
   )
 }
