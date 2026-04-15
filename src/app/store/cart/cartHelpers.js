@@ -11,10 +11,7 @@ export const increaseQuantityHelper = (item) => {
   item.quantity += 1
 }
 
-export const decreaseQuantityHelper = (state, item) => {
-  if (item.quantity > 1) {
-    item.quantity -= 1
-  } else {
-    removeItemHelper(state, item.id)
-  }
+export const decreaseQuantityHelper = (item) => {
+  if (item.quantity <= 1) return
+  item.quantity -= 1
 }

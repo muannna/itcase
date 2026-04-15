@@ -44,7 +44,7 @@ const cartSlice = createSlice({
       const id = action.payload
       const item = findItemHelper(state, id)
 
-      if (item) decreaseQuantityHelper(state, item)
+      if (item) decreaseQuantityHelper(item)
     },
 
     removeItem: (state, action) => {
@@ -58,5 +58,6 @@ const cartSlice = createSlice({
   },
 })
 
-export const { addItem, removeItem, clearCart } = cartSlice.actions
+export const { addItem, incrementItemQuantity, decrementItemQuantity, removeItem, clearCart } =
+  cartSlice.actions
 export default cartSlice.reducer
