@@ -1,59 +1,20 @@
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import { selectCartItems, selectCartCount } from '../../app/store/cart/selectors'
+import { useCartViewModel } from '../../hooks/cart/useCartViewModel'
 import { formatPrice } from '../../utils/formatPrice'
-import { useProducts } from '../../queries/products/useProducts'
-import { useSizes } from '../../queries/sizes/useSizes'
 import { Loader } from '../../shared/ui/loader/Loader'
 import { Error } from '../../shared/ui/error/Error'
 import { EmptyState } from '../../shared/ui/emptyState/EmptyState'
-import { clearCart } from '../../app/store/cart/cartSlice'
 
 export function CartPage() {
-  const dispatch = useDispatch()
-  const cart = useSelector(selectCartItems)
-  const totalQuantity = useSelector(selectCartCount)
-  const { data: products = [], isLoading: isProductsLoading, error: productsError } = useProducts()
-  const { data: sizes = [], isLoading: isSizesLoading, error: sizesError } = useSizes()
-  const isLoading = isProductsLoading || isSizesLoading
-  const error = productsError || sizesError
-
-  const sizeMap = Object.fromEntries(sizes.map((size) => [size.id, size]))
-  const productMap = Object.fromEntries(products.map((product) => [product.id, product]))
-
-  const enrichedCart = cart.map((item) => {
-    const product = productMap[item.productId] || null
-    const color = product?.colors.find((color) => color.id === item.colorId) || null
-    const isSizeAvailable = color?.sizes?.includes(item.sizeId) ?? false
-    const size = sizeMap[item.sizeId] || null
-    const currentPrice = color?.price ?? null
-    const isPriceChanged = color?.price != null && color.price !== item.priceAtAdd
-    const isValid = Boolean(color && size && isSizeAvailable)
-
-    return {
-      ...item,
-      product,
-      color,
-      size,
-      isSizeAvailable,
-      currentPrice,
-      isPriceChanged,
-      isValid,
-    }
-  })
-
-  const validItems = enrichedCart.filter((item) => item.isValid)
-  const totalValue = validItems.reduce((sum, item) => {
-    return sum + item.currentPrice * item.quantity
-  }, 0)
-  const total = formatPrice(totalValue)
-  const validTotalQuantity = validItems.reduce((sum, item) => {
-    return sum + item.quantity
-  }, 0)
-
-  const removeAllFromCart = () => {
-    dispatch(clearCart())
-  }
+  const {
+    isLoading,
+    error,
+    enrichedCart,
+    total,
+    totalQuantity,
+    validTotalQuantity,
+    removeAllFromCart,
+    isEmpty,
+  } = useCartViewModel()
 
   let content = null
 
@@ -61,7 +22,7 @@ export function CartPage() {
     content = <Loader text="Loading cart..." />
   } else if (error) {
     content = <Error error={error} message="Error loading products" />
-  } else if (!cart.length) {
+  } else if (isEmpty) {
     content = <EmptyState text="Your shopping cart is currently empty." />
   } else {
     content = (
