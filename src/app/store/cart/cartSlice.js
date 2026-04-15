@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { loadCart } from './cartStorage'
+import {
+  createCartItemIdHelper,
+  findItemHelper,
+  removeItemHelper,
+  increaseQuantityHelper,
+  decreaseQuantityHelper,
+} from './cartHelpers'
 
 const initialState = {
   items: loadCart(),
@@ -10,40 +17,39 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      const {
-        productId,
-        colorId,
-        sizeId,
-        priceAtAdd,
-        image,
-        productNameAtAdd,
-        productBrandAtAdd,
-        colorNameAtAdd,
-        sizeNameAtAdd,
-      } = action.payload
-      const id = `${productId}-${colorId}-${sizeId}`
-      const existing = state.items.find((el) => el.id === id)
+      const payload = action.payload
+      const id = createCartItemIdHelper(payload)
+      const existing = findItemHelper(state, id)
 
-      if (existing) existing.quantity += 1
-      else {
-        state.items.push({
-          id,
-          productId,
-          colorId,
-          sizeId,
-          priceAtAdd,
-          image,
-          productNameAtAdd,
-          productBrandAtAdd,
-          colorNameAtAdd,
-          sizeNameAtAdd,
-          quantity: 1,
-        })
+      if (existing) {
+        increaseQuantityHelper(existing)
+        return
       }
+
+      state.items.push({
+        id,
+        ...payload,
+        quantity: 1,
+      })
+    },
+
+    incrementItemQuantity: (state, action) => {
+      const id = action.payload
+      const item = findItemHelper(state, id)
+
+      if (item) increaseQuantityHelper(item)
+    },
+
+    decrementItemQuantity: (state, action) => {
+      const id = action.payload
+      const item = findItemHelper(state, id)
+
+      if (item) decreaseQuantityHelper(state, item)
     },
 
     removeItem: (state, action) => {
-      state.items.filter((el) => el.id !== action.payload)
+      const id = action.payload
+      removeItemHelper(state, id)
     },
 
     clearCart: (state) => {
