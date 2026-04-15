@@ -20,7 +20,7 @@
   box-shadow: 0 2px 4px var(--color-black01);
 }
 
-.button:disabled {
+.button:not(.isCart):disabled {
   background: var(--color-button-disabled-bg);
   color: var(--color-button-disabled-text);
   border: 1px solid var(--color-black06);
@@ -54,4 +54,13 @@
 
 .isCart:hover {
   background: var(--color-accent);
+}
+
+.isCart:disabled {
+  padding: 8px 12px;
+  background: var(--color-button-disabled-bg);
+  color: var(--color-button-disabled-text);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
