@@ -1,0 +1,7 @@
+.warning {
+  color: var(--color-orange);
+}
+
+.label {
+  font-weight: 600;
+}

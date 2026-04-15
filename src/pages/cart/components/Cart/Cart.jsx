@@ -2,6 +2,8 @@ import { CartList } from '../CartList/CartList'
 import { CartSummary } from '../CartSummary/CartSummary'
 import { CartActions } from '../CartActions/CartActions'
 
+import styles from './Cart.module.css'
+
 export function Cart({
   availableItems,
   availableTitle,
@@ -13,11 +15,15 @@ export function Cart({
   removeAllFromCart,
 }) {
   return (
-    <div>
-      <h1>Cart</h1>
-      <CartList items={availableItems} title={availableTitle} />
+    <div className={styles.container}>
+      <h1 className={styles.title}>Cart</h1>
+      <div className={`${styles.section} ${styles.available}`}>
+        <CartList items={availableItems} title={availableTitle} />
+      </div>
       {unavailableItems.length > 0 && (
-        <CartList items={unavailableItems} title={unavailableTitle} />
+        <div className={`${styles.section} ${styles.unavailable}`}>
+          <CartList items={unavailableItems} title={unavailableTitle} />
+        </div>
       )}
       <CartSummary
         total={total}

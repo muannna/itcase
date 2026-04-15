@@ -1,3 +1,9 @@
+import styles from './CartItemQuantity.module.css'
+
 export function CartItemQuantity({ item }) {
-  return <p>Quantity: {item.quantity}</p>
+  return (
+    <p>
+      <span className={styles.label}>Quantity: </span> {item.quantity}
+    </p>
+  )
 }

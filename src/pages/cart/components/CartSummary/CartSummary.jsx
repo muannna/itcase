@@ -1,18 +1,26 @@
+import styles from './CartSummary.module.css'
+
 export function CartSummary({ total, totalQuantity, validTotalQuantity }) {
+  const hasUnavailableItems = totalQuantity !== validTotalQuantity
   return (
-    <>
-      {totalQuantity !== validTotalQuantity ? (
-        <div style={{ color: 'orange' }}>
-          <p>Some items are unavailable and excluded from total</p>
-          <p>
-            {' '}
-            Available for purchase: {validTotalQuantity} of {totalQuantity}
-          </p>
-        </div>
-      ) : (
-        <p>Total items in cart: {totalQuantity}</p>
-      )}
-      <p>Total: {total}</p>
-    </>
+    <div className={styles.wrapper}>
+      <div className={styles.info}>
+        {hasUnavailableItems ? (
+          <>
+            <p className={styles.warningText}>Some items are unavailable and excluded from total</p>
+            <p className={styles.subText}>
+              Available for purchase: {validTotalQuantity} of {totalQuantity}
+            </p>
+          </>
+        ) : (
+          <p className={styles.text}>Total items in cart: {totalQuantity}</p>
+        )}
+      </div>
+
+      <div className={styles.total}>
+        <span className={styles.label}>Total:</span>
+        <span className={styles.value}>{total}</span>
+      </div>
+    </div>
   )
 }
