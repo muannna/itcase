@@ -10,9 +10,9 @@ export function Button({
 }) {
   const classes = [
     styles.button,
-    isActive ? styles.selectedBut : '',
-    !isAvailable ? styles.notAvailableBut : '',
-    isCart ? styles.isCart : '',
+    isActive && styles.selectedBut,
+    !isAvailable && styles.notAvailableBut,
+    isCart && styles.isCart,
   ]
     .filter(Boolean)
     .join(' ')
