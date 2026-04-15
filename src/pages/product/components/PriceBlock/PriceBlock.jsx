@@ -73,6 +73,19 @@ export function PriceBlock({ selectedColor, selectedSize, availableSizes, produc
         sizeNameAtAdd: 'L (50)',
       }),
     )
+    dispatch(
+      addItem({
+        productId: 1,
+        colorId: 1,
+        sizeId: 1,
+        priceAtAdd: '126.00',
+        image: '/images/1/black_front.png',
+        productNameAtAdd: 'Футболка',
+        productBrandAtAdd: 'Basic Club',
+        colorNameAtAdd: 'черный',
+        sizeNameAtAdd: 'XS (44)',
+      }),
+    )
   }
   return (
     <div className={styles.priceBlock}>
