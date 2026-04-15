@@ -6,7 +6,7 @@ export function deriveProductState(product, searchParams) {
   const colorId = Number(searchParams.get('color'))
   const sizeId = Number(searchParams.get('size'))
 
-  const selectedColor = product.colors.find((c) => c.id === colorId) ?? cheapestColor
+  const selectedColor = product.colors.find((color) => color.id === colorId) ?? cheapestColor
 
   const selectedSize = selectedColor.sizes.includes(sizeId) ? sizeId : null
 

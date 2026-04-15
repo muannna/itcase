@@ -25,9 +25,52 @@ export function PriceBlock({ selectedColor, selectedSize, availableSizes, produc
         colorId: selectedColor.id,
         sizeId: selectedSize,
         priceAtAdd: selectedColor.price,
-        productName: product.name,
-        productBrand: product.brand,
         image: selectedColor.images[0],
+        productNameAtAdd: product.name,
+        productBrandAtAdd: product.brand,
+        colorNameAtAdd: selectedColor.name,
+        sizeNameAtAdd: `${selectedSize.name} (${selectedSize.number})`,
+      }),
+    )
+  }
+  const addFakeToCart = () => {
+    dispatch(
+      addItem({
+        productId: 7,
+        colorId: 1,
+        sizeId: 1,
+        priceAtAdd: '519.00',
+        image: '/images/1/black_front.png',
+        productNameAtAdd: 'Футболка',
+        productBrandAtAdd: 'Lacoste',
+        colorNameAtAdd: 'розовый',
+        sizeNameAtAdd: 'XS (44)',
+      }),
+    )
+    dispatch(
+      addItem({
+        productId: 1,
+        colorId: 4,
+        sizeId: 1,
+        priceAtAdd: '519.00',
+        image: '/images/1/gray_front.png',
+        productNameAtAdd: 'Футболка',
+        productBrandAtAdd: 'Basic Club',
+        colorNameAtAdd: 'розовый',
+        sizeNameAtAdd: 'XS (44)',
+      }),
+    )
+    dispatch(
+      addItem({
+        productId: 1,
+        colorId: 1,
+        sizeId: 4,
+        priceAtAdd: '123.00',
+        image: '/images/1/black_front.png',
+        productNameAtAdd: 'Футболка',
+        productBrandAtAdd: 'Basic Club',
+        colorNameAtAdd: 'черный',
+        sizeNameAtAdd: 'L (50)',
       }),
     )
   }
@@ -39,6 +82,9 @@ export function PriceBlock({ selectedColor, selectedSize, availableSizes, produc
       </p>
       <Button isCart={true} disabled={!availableSizes.size} onClick={addToCart}>
         Add to cart
+      </Button>
+      <Button isCart={true} onClick={addFakeToCart}>
+        Add fake products
       </Button>
     </div>
   )
