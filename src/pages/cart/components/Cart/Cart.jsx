@@ -3,7 +3,10 @@ import { CartSummary } from '../CartSummary/CartSummary'
 import { CartActions } from '../CartActions/CartActions'
 
 export function Cart({
-  enrichedCart,
+  availableItems,
+  availableTitle,
+  unavailableItems,
+  unavailableTitle,
   total,
   totalQuantity,
   validTotalQuantity,
@@ -12,7 +15,10 @@ export function Cart({
   return (
     <div>
       <h1>Cart</h1>
-      <CartList items={enrichedCart} />
+      <CartList items={availableItems} title={availableTitle} />
+      {unavailableItems.length > 0 && (
+        <CartList items={unavailableItems} title={unavailableTitle} />
+      )}
       <CartSummary
         total={total}
         totalQuantity={totalQuantity}

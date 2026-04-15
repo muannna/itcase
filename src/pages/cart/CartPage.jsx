@@ -10,7 +10,10 @@ export function CartPage() {
   const {
     isLoading,
     error,
-    enrichedCart,
+    availableItems,
+    availableTitle,
+    unavailableItems,
+    unavailableTitle,
     total,
     totalQuantity,
     validTotalQuantity,
@@ -29,7 +32,10 @@ export function CartPage() {
   } else {
     content = (
       <Cart
-        enrichedCart={enrichedCart}
+        availableItems={availableItems}
+        availableTitle={availableTitle}
+        unavailableItems={unavailableItems}
+        unavailableTitle={unavailableTitle}
         total={total}
         totalQuantity={totalQuantity}
         validTotalQuantity={validTotalQuantity}
