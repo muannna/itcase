@@ -13,7 +13,7 @@ export function useCartActions() {
         productId: product.id,
         colorId: selectedColor.id,
         sizeId: selectedSize,
-        priceAtAdd: selectedColor.price,
+        priceAtAdd: Number(selectedColor.price),
         image: selectedColor.images[0],
         productNameAtAdd: product.name,
         productBrandAtAdd: product.brand,

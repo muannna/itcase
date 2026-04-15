@@ -4,7 +4,8 @@ export const createCartItemIdHelper = ({ productId, colorId, sizeId }) =>
 export const findItemHelper = (state, id) => state.items.find((el) => el.id === id)
 
 export const removeItemHelper = (state, id) => {
-  state.items = state.items.filter((el) => el.id !== id)
+  const index = state.items.findIndex((el) => el.id === id)
+  if (index !== -1) state.items.splice(index, 1)
 }
 
 export const increaseQuantityHelper = (item) => {
