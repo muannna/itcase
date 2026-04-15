@@ -5,4 +5,9 @@
   border-radius: 8px;
   flex-shrink: 0;
   border: 2px outset var(--color-toggle-border);
+  transition: 0.2s ease all;
+}
+
+.cartImg:hover {
+  border: 2px outset var(--color-accent);
 }

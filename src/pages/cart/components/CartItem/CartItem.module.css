@@ -1,10 +1,15 @@
 .item {
   display: flex;
   align-items: flex-start;
-  gap: 26px;
+  justify-content: space-between;
+  width: 100%;
   padding: 20px;
-  border-radius: 10px;
   position: relative;
+}
+
+.left {
+  display: flex;
+  gap: 16px;
 }
 
 .item::after {
