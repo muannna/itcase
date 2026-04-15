@@ -15,6 +15,7 @@ export function CartPage() {
     unavailableItems,
     unavailableTitle,
     total,
+    validTotal,
     totalQuantity,
     validTotalQuantity,
     removeAllFromCart,
@@ -37,6 +38,7 @@ export function CartPage() {
         unavailableItems={unavailableItems}
         unavailableTitle={unavailableTitle}
         total={total}
+        validTotal={validTotal}
         totalQuantity={totalQuantity}
         validTotalQuantity={validTotalQuantity}
         removeAllFromCart={removeAllFromCart}

@@ -1,6 +1,6 @@
 import styles from './CartSummary.module.css'
 
-export function CartSummary({ total, totalQuantity, validTotalQuantity }) {
+export function CartSummary({ total, validTotal, totalQuantity, validTotalQuantity }) {
   const hasUnavailableItems = totalQuantity !== validTotalQuantity
   return (
     <div className={styles.wrapper}>
@@ -8,6 +8,7 @@ export function CartSummary({ total, totalQuantity, validTotalQuantity }) {
         {hasUnavailableItems ? (
           <>
             <p className={styles.warningText}>Some items are unavailable and excluded from total</p>
+            <p className={styles.subText}>Original total: {total}</p>
             <p className={styles.subText}>
               Available for purchase: {validTotalQuantity} of {totalQuantity}
             </p>
@@ -19,7 +20,7 @@ export function CartSummary({ total, totalQuantity, validTotalQuantity }) {
 
       <div className={styles.total}>
         <span className={styles.label}>Total:</span>
-        <span className={styles.value}>{total}</span>
+        <span className={styles.value}>{validTotal}</span>
       </div>
     </div>
   )

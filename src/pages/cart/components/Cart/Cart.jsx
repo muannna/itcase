@@ -10,6 +10,7 @@ export function Cart({
   unavailableItems,
   unavailableTitle,
   total,
+  validTotal,
   totalQuantity,
   validTotalQuantity,
   removeAllFromCart,
@@ -27,6 +28,7 @@ export function Cart({
       )}
       <CartSummary
         total={total}
+        validTotal={validTotal}
         totalQuantity={totalQuantity}
         validTotalQuantity={validTotalQuantity}
       />

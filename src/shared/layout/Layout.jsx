@@ -1,5 +1,6 @@
 import { Outlet, Link } from 'react-router-dom'
 import { ThemeToggle } from '../ui/themeToggle/ThemeToggle'
+import { CartLink } from '../ui/cartLink/CartLink'
 
 import styles from './Layout.module.css'
 
@@ -15,7 +16,7 @@ export function Layout() {
           </div>
           <div className={styles.right}>
             <ThemeToggle />
-            <Link to="/cart">Cart</Link>
+            <CartLink />
           </div>
         </nav>
       </div>

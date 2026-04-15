@@ -7,13 +7,13 @@ export function useCartTotals(enrichedCart) {
     const totalValue = validItems.reduce((sum, item) => {
       return sum + item.currentPrice * item.quantity
     }, 0)
-    const total = formatPrice(totalValue)
+    const validTotal = formatPrice(totalValue)
     const validTotalQuantity = validItems.reduce((sum, item) => {
       return sum + item.quantity
     }, 0)
 
     return {
-      total,
+      validTotal,
       validTotalQuantity,
     }
   }, [enrichedCart])
