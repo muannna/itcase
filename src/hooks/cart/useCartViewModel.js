@@ -48,19 +48,27 @@ export function useCartViewModel() {
   }
 
   return {
-    isLoading,
-    error,
-    availableItems: groupedCart.available,
-    availableTitle: groupedCart.availableTitle,
-    unavailableItems: groupedCart.unavailable,
-    unavailableTitle: groupedCart.unavailableTitle,
-    total,
-    validTotal,
-    totalQuantity,
-    validTotalQuantity,
-    finalTotal,
-    promoEligible,
-    removeAllFromCart,
-    isEmpty: cart.length === 0,
+    status: {
+      isLoading,
+      error,
+      isEmpty: cart.length === 0,
+    },
+    cart: {
+      availableItems: groupedCart.available,
+      availableTitle: groupedCart.availableTitle,
+      unavailableItems: groupedCart.unavailable,
+      unavailableTitle: groupedCart.unavailableTitle,
+    },
+    totals: {
+      total,
+      validTotal,
+      totalQuantity,
+      validTotalQuantity,
+      finalTotal,
+      promoEligible,
+    },
+    actions: {
+      removeAllFromCart,
+    },
   }
 }

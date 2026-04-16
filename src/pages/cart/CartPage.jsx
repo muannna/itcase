@@ -7,47 +7,18 @@ import { Cart } from './components/Cart/Cart'
 import styles from './CartPage.module.css'
 
 export function CartPage() {
-  const {
-    isLoading,
-    error,
-    availableItems,
-    availableTitle,
-    unavailableItems,
-    unavailableTitle,
-    total,
-    validTotal,
-    totalQuantity,
-    validTotalQuantity,
-    finalTotal,
-    promoEligible,
-    removeAllFromCart,
-    isEmpty,
-  } = useCartViewModel()
+  const { status, cart, totals, actions } = useCartViewModel()
 
   let content = null
 
-  if (isLoading) {
+  if (status.isLoading) {
     content = <Loader text="Loading cart..." />
-  } else if (error) {
-    content = <Error error={error} message="Error loading products" />
-  } else if (isEmpty) {
+  } else if (status.error) {
+    content = <Error error={status.error} message="Error loading products" />
+  } else if (status.isEmpty) {
     content = <EmptyState text="Your shopping cart is currently empty." />
   } else {
-    content = (
-      <Cart
-        availableItems={availableItems}
-        availableTitle={availableTitle}
-        unavailableItems={unavailableItems}
-        unavailableTitle={unavailableTitle}
-        total={total}
-        validTotal={validTotal}
-        totalQuantity={totalQuantity}
-        validTotalQuantity={validTotalQuantity}
-        finalTotal={finalTotal}
-        promoEligible={promoEligible}
-        removeAllFromCart={removeAllFromCart}
-      />
-    )
+    content = <Cart cart={cart} totals={totals} actions={actions} />
   }
 
   return <div className={styles.page}>{content}</div>

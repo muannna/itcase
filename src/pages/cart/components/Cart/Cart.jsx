@@ -4,39 +4,20 @@ import { CartActions } from '../CartActions/CartActions'
 
 import styles from './Cart.module.css'
 
-export function Cart({
-  availableItems,
-  availableTitle,
-  unavailableItems,
-  unavailableTitle,
-  total,
-  validTotal,
-  totalQuantity,
-  validTotalQuantity,
-  finalTotal,
-  promoEligible,
-  removeAllFromCart,
-}) {
+export function Cart({ cart, totals, actions }) {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Cart</h1>
       <div className={`${styles.section} ${styles.available}`}>
-        <CartList items={availableItems} title={availableTitle} />
+        <CartList items={cart.availableItems} title={cart.availableTitle} />
       </div>
-      {unavailableItems.length > 0 && (
+      {cart.unavailableItems.length > 0 && (
         <div className={`${styles.section} ${styles.unavailable}`}>
-          <CartList items={unavailableItems} title={unavailableTitle} />
+          <CartList items={cart.unavailableItems} title={cart.unavailableTitle} />
         </div>
       )}
-      <CartSummary
-        total={total}
-        validTotal={validTotal}
-        totalQuantity={totalQuantity}
-        validTotalQuantity={validTotalQuantity}
-        finalTotal={finalTotal}
-        promoEligible={promoEligible}
-      />
-      <CartActions removeAllFromCart={removeAllFromCart} />
+      <CartSummary totals={totals} />
+      <CartActions removeAllFromCart={actions.removeAllFromCart} />
     </div>
   )
 }
