@@ -18,6 +18,8 @@ export function CartPage() {
     validTotal,
     totalQuantity,
     validTotalQuantity,
+    finalTotal,
+    promoEligible,
     removeAllFromCart,
     isEmpty,
   } = useCartViewModel()
@@ -41,6 +43,8 @@ export function CartPage() {
         validTotal={validTotal}
         totalQuantity={totalQuantity}
         validTotalQuantity={validTotalQuantity}
+        finalTotal={finalTotal}
+        promoEligible={promoEligible}
         removeAllFromCart={removeAllFromCart}
       />
     )

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { loadCart } from './cartStorage'
+import { PROMO_CODES } from '../../../shared/config/promoCodes'
 import {
   createCartItemIdHelper,
   findItemHelper,
@@ -10,6 +11,11 @@ import {
 
 const initialState = {
   items: loadCart(),
+  promo: {
+    code: null,
+    discount: 0,
+    error: null,
+  },
 }
 
 const cartSlice = createSlice({
@@ -55,9 +61,35 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = []
     },
+
+    applyPromo: (state, action) => {
+      const code = action.payload
+      const validPromo = PROMO_CODES[code]
+      if (!validPromo) {
+        state.promo = {
+          code: null,
+          discount: 0,
+          error: 'Invalid promo code',
+        }
+        return
+      }
+
+      state.promo = {
+        code,
+        discount: validPromo.value,
+        minTotal: validPromo.minTotal,
+        error: null,
+      }
+    },
   },
 })
 
-export const { addItem, incrementItemQuantity, decrementItemQuantity, removeItem, clearCart } =
-  cartSlice.actions
+export const {
+  addItem,
+  incrementItemQuantity,
+  decrementItemQuantity,
+  removeItem,
+  clearCart,
+  applyPromo,
+} = cartSlice.actions
 export default cartSlice.reducer

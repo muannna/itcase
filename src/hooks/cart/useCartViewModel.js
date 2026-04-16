@@ -1,6 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useMemo } from 'react'
-import { selectCartItems, selectCartCount, selectCartTotal } from '../../app/store/cart/selectors'
+import {
+  selectCartItems,
+  selectCartCount,
+  selectCartTotal,
+  selectCartPromo,
+} from '../../app/store/cart/selectors'
 import { useCartPageData } from './useCartPageData'
 import { useCartEnriched } from './useCartEnriched'
 import { useCartTotals } from './useCartTotals'
@@ -12,6 +17,7 @@ export function useCartViewModel() {
   const cart = useSelector(selectCartItems)
   const total = useSelector(selectCartTotal)
   const totalQuantity = useSelector(selectCartCount)
+  const promo = useSelector(selectCartPromo)
 
   const { products, sizes, isLoading, error } = useCartPageData()
   const enrichedCart = useCartEnriched(cart, products, sizes)
@@ -32,7 +38,10 @@ export function useCartViewModel() {
     return { available, availableTitle, unavailable, unavailableTitle }
   }, [enrichedCart])
 
-  const { validTotal, validTotalQuantity } = useCartTotals(enrichedCart)
+  const { validTotal, validTotalQuantity, finalTotal, promoEligible } = useCartTotals(
+    enrichedCart,
+    promo,
+  )
 
   const removeAllFromCart = () => {
     dispatch(clearCart())
@@ -49,6 +58,8 @@ export function useCartViewModel() {
     validTotal,
     totalQuantity,
     validTotalQuantity,
+    finalTotal,
+    promoEligible,
     removeAllFromCart,
     isEmpty: cart.length === 0,
   }

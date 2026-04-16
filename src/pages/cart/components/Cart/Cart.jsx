@@ -13,6 +13,8 @@ export function Cart({
   validTotal,
   totalQuantity,
   validTotalQuantity,
+  finalTotal,
+  promoEligible,
   removeAllFromCart,
 }) {
   return (
@@ -31,6 +33,8 @@ export function Cart({
         validTotal={validTotal}
         totalQuantity={totalQuantity}
         validTotalQuantity={validTotalQuantity}
+        finalTotal={finalTotal}
+        promoEligible={promoEligible}
       />
       <CartActions removeAllFromCart={removeAllFromCart} />
     </div>

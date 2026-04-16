@@ -1,6 +1,15 @@
+import { CartPromo } from '../CartPromo/CartPromo'
+
 import styles from './CartSummary.module.css'
 
-export function CartSummary({ total, validTotal, totalQuantity, validTotalQuantity }) {
+export function CartSummary({
+  total,
+  validTotal,
+  totalQuantity,
+  validTotalQuantity,
+  finalTotal,
+  promoEligible,
+}) {
   const hasUnavailableItems = totalQuantity !== validTotalQuantity
   return (
     <div className={styles.wrapper}>
@@ -16,11 +25,13 @@ export function CartSummary({ total, validTotal, totalQuantity, validTotalQuanti
         ) : (
           <p className={styles.text}>Total items in cart: {totalQuantity}</p>
         )}
+        <CartPromo promoEligible={promoEligible} />
       </div>
 
       <div className={styles.total}>
         <span className={styles.label}>Total:</span>
         <span className={styles.value}>{validTotal}</span>
+        <span className={styles.value}>{finalTotal}</span>
       </div>
     </div>
   )

@@ -4,3 +4,7 @@ export const selectCartCount = (state) => state.cart.items.reduce((sum, i) => su
 
 export const selectCartTotal = (state) =>
   state.cart.items.reduce((sum, i) => sum + i.priceAtAdd * i.quantity, 0)
+
+export const selectCartPromo = (state) => state.cart.promo
+
+export const selectCartPromoError = (state) => state.cart.promo.error
