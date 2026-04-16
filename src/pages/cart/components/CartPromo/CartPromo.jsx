@@ -17,7 +17,9 @@ export function CartPromo({ promoEligible }) {
     return (
       <div className={styles.container}>
         <CartPromoInputForm />
-        {error && <p className={styles.error}>{error}</p>}
+        <div className={styles.messages}>
+          <p className={styles.error}>{error}</p>
+        </div>
       </div>
     )
   }
@@ -26,7 +28,9 @@ export function CartPromo({ promoEligible }) {
     return (
       <div className={styles.container}>
         <div className={styles.active}>
-          <p>Promo code: {promo.code}</p>
+          <p>
+            Promo code: <span className={styles.code}>{promo.code}</span>
+          </p>
           <p className={styles.warning}>Add items worth {formatPrice(promo.minTotal)}</p>
         </div>
         {error && <p className={styles.error}>{error}</p>}
@@ -37,7 +41,9 @@ export function CartPromo({ promoEligible }) {
   return (
     <div className={styles.container}>
       <div className={styles.active}>
-        <p>Promo applied: {promo.code}</p>
+        <p>
+          Promo code: <span className={styles.code}>{promo.code}</span>
+        </p>
         <Button onClick={() => dispatch(clearPromo())}>Remove</Button>
       </div>
     </div>
