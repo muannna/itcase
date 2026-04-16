@@ -4,7 +4,10 @@
 
 **Test Task**: https://github.com/ITCase/react-test-task/tree/middle  
 Mini product catalog built with React.  
-Implements product listing, product details, and cart functionality using data from a pseudo API.  
+Implements product listing, product details, and cart functionality using data from a pseudo API.
+
+## Deploy
+https://itcase-muannna.netlify.app/
 
 ## Features
 - Product list with search, filters, and sorting
