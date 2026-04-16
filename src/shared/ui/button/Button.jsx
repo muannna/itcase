@@ -3,6 +3,7 @@ import styles from './Button.module.css'
 export function Button({
   children,
   onClick,
+  type = 'button',
   disabled = false,
   isActive = false,
   isAvailable = true,
@@ -17,7 +18,7 @@ export function Button({
     .filter(Boolean)
     .join(' ')
   return (
-    <button type="button" onClick={onClick} className={classes} disabled={disabled}>
+    <button type={type} onClick={onClick} className={classes} disabled={disabled}>
       {children}
     </button>
   )

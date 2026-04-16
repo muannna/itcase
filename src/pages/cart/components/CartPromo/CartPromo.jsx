@@ -1,34 +1,45 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
-import { applyPromo } from '../../../../app/store/cart/cartSlice'
+import { useSelector, useDispatch } from 'react-redux'
 import { selectCartPromo, selectCartPromoError } from '../../../../app/store/cart/selectors'
+import { clearPromo } from '../../../../app/store/cart/cartSlice'
+import { CartPromoInputForm } from './CartPromoInputForm/CartPromoInputForm'
+import { Button } from '../../../../shared/ui/button/Button'
+import { formatPrice } from '../../../../utils/formatPrice'
 
 import styles from './CartPromo.module.css'
 
 export function CartPromo({ promoEligible }) {
   const dispatch = useDispatch()
-  const [code, setCode] = useState('')
   const error = useSelector(selectCartPromoError)
   const promo = useSelector(selectCartPromo)
+  const hasPromo = Boolean(promo.code)
 
-  const handleApply = () => {
-    dispatch(applyPromo(code.trim()))
+  if (!hasPromo) {
+    return (
+      <div className={styles.container}>
+        <CartPromoInputForm />
+        {error && <p className={styles.error}>{error}</p>}
+      </div>
+    )
+  }
+
+  if (!promoEligible) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.active}>
+          <p>Promo code: {promo.code}</p>
+          <p className={styles.warning}>Add items worth {formatPrice(promo.minTotal)}</p>
+        </div>
+        {error && <p className={styles.error}>{error}</p>}
+      </div>
+    )
   }
 
   return (
-    <div>
-      <input
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        placeholder="Enter promo code"
-      />
-      <button onClick={handleApply}>Apply</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <p>
-        {promo.code && !promoEligible && (
-          <span className={styles.warning}>Add items worth 1000₽ to apply promo</span>
-        )}
-      </p>
+    <div className={styles.container}>
+      <div className={styles.active}>
+        <p>Promo applied: {promo.code}</p>
+        <Button onClick={() => dispatch(clearPromo())}>Remove</Button>
+      </div>
     </div>
   )
 }
