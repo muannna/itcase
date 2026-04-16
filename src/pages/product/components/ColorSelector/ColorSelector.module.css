@@ -1,0 +1,16 @@
+.color {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 20px;
+}
+
+.label {
+  font-size: 12px;
+}
+
+.colorRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

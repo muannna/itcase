@@ -1,0 +1,11 @@
+.message {
+  font-size: 13px;
+}
+
+.warning {
+  color: var(--color-orange);
+}
+
+.error {
+  color: var(--color-red);
+}

@@ -1,0 +1,21 @@
+.total {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.unit {
+  color: var(--color-button-disabled-text);
+  font-size: 13px;
+}
+
+.equals {
+  color: var(--color-button-disabled-text);
+  font-weight: 400;
+}
+
+.final {
+  font-weight: 700;
+  font-size: 15px;
+}

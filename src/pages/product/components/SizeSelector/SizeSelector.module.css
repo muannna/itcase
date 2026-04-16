@@ -1,0 +1,16 @@
+.size {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 20px;
+}
+
+.label {
+  font-size: 12px;
+}
+
+.sizeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

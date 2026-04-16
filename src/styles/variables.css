@@ -1,0 +1,31 @@
+:root {
+  --color-primary: #ffffff;
+  --color-bg: #d1d5db;
+  --color-text: #000000;
+  --color-primary-hover: #f3f4f6;
+  --color-toggle-border: rgba(0, 0, 0, 0.08);
+  --color-button-disabled-bg: #e5e7eb;
+  --color-button-disabled-text: #9ca3af;
+  --color-search-placeholder: rgba(0, 0, 0, 0.4);
+  --color-white: #ffffff;
+  --color-red: #d32f2f;
+  --color-orange: #ffa500;
+  --color-accent: rgba(245, 48, 235, 0.6);
+  --color-accent-shadow: rgba(245, 48, 235, 0.15);
+  --color-accent-second: rgb(219, 42, 160);
+  --color-box-shadow: rgba(0, 0, 0, 0.2);
+  --color-black01: rgba(0, 0, 0, 0.1);
+  --color-black06: rgba(0, 0, 0, 0.06);
+  --font-main: 'Inter';
+}
+
+[data-theme='dark'] {
+  --color-primary: #2d2d2d;
+  --color-bg: #000000;
+  --color-text: #d1d5db;
+  --color-primary-hover: #3a3a3a;
+  --color-toggle-border: rgba(255, 255, 255, 0.255);
+  --color-button-disabled-bg: #3a3a3a;
+  --color-button-disabled-text: #6b7280;
+  --color-search-placeholder: rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,28 @@
+.switch {
+  width: 42px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid var(--color-toggle-border);
+  cursor: pointer;
+  position: relative;
+  background: var(--color-bg);
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.slider {
+  width: 18px;
+  height: 18px;
+  background: var(--color-white);
+  border-radius: 50%;
+  transition: transform 0.25s ease;
+  box-shadow: 0 2px 6px var(--color-box-shadow);
+}
+
+.dark .slider {
+  transform: translateX(20px);
+}

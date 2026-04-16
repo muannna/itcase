@@ -12,6 +12,6 @@ if (rootView) {
     <React.StrictMode>
       <App />
     </React.StrictMode>,
-    rootView
+    rootView,
   )
 }
