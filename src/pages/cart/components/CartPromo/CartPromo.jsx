@@ -17,18 +17,18 @@ export function CartPromo({ promoEligible }) {
 
   return (
     <div>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <p>
-        {promo.code && !promoEligible && (
-          <span className={styles.warning}>Add items worth 1000₽ to apply promo</span>
-        )}
-      </p>
       <input
         value={code}
         onChange={(e) => setCode(e.target.value)}
         placeholder="Enter promo code"
       />
       <button onClick={handleApply}>Apply</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <p>
+        {promo.code && !promoEligible && (
+          <span className={styles.warning}>Add items worth 1000₽ to apply promo</span>
+        )}
+      </p>
     </div>
   )
 }
