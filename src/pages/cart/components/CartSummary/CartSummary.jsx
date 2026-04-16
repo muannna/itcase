@@ -23,8 +23,14 @@ export function CartSummary({ totals }) {
 
       <div className={styles.total}>
         <span className={styles.label}>Total:</span>
-        <span className={styles.value}>{totals.validTotal}</span>
-        <span className={styles.value}>{totals.finalTotal}</span>
+        {!totals.promoEligible ? (
+          <span className={styles.value}>{totals.validTotal}</span>
+        ) : (
+          <div className={styles.prices}>
+            <span className={styles.oldValue}>{totals.validTotal}</span>
+            <span className={styles.value}>{totals.finalTotal}</span>
+          </div>
+        )}
       </div>
     </div>
   )
