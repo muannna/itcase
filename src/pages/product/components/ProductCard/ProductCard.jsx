@@ -33,6 +33,7 @@ export function ProductCard({ product, category, sizes }) {
           selectedSize={selectedSize}
           availableSizes={availableSizes}
           product={product}
+          sizes={sizes}
         />
       </div>
     </div>

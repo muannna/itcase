@@ -4,21 +4,18 @@ import { addItem } from '../../app/store/cart/cartSlice'
 export function useCartActions() {
   const dispatch = useDispatch()
 
-  const addToCart = ({ product, selectedColor, selectedSize, setTouched }) => {
-    setTouched(true)
-    if (!selectedSize) return
-
+  const addToCart = ({ productId, productNameAtAdd, productBrandAtAdd, color, size }) => {
     dispatch(
       addItem({
-        productId: product.id,
-        colorId: selectedColor.id,
-        sizeId: selectedSize,
-        priceAtAdd: selectedColor.price,
-        image: selectedColor.images[0],
-        productNameAtAdd: product.name,
-        productBrandAtAdd: product.brand,
-        colorNameAtAdd: selectedColor.name,
-        sizeNameAtAdd: `${selectedSize.name} (${selectedSize.number})`,
+        productId,
+        productNameAtAdd,
+        productBrandAtAdd,
+        colorId: color.id,
+        colorNameAtAdd: color.name,
+        sizeId: size.id,
+        priceAtAdd: color.price,
+        image: color.images[0],
+        sizeNameAtAdd: `${size.name} (${size.number})`,
       }),
     )
   }

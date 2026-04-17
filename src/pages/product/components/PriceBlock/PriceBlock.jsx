@@ -6,7 +6,7 @@ import { useCartItem } from '../../../../hooks/cart/useCartItem.js'
 
 import styles from './PriceBlock.module.css'
 
-export function PriceBlock({ selectedColor, selectedSize, availableSizes, product }) {
+export function PriceBlock({ selectedColor, selectedSize, availableSizes, product, sizes }) {
   const [touched, setTouched] = useState(false)
   const { addToCart, addFakeToCart } = useCartActions()
   const formatedPrice = formatPrice(selectedColor.price)
@@ -15,14 +15,19 @@ export function PriceBlock({ selectedColor, selectedSize, availableSizes, produc
     colorId: selectedColor.id,
     sizeId: selectedSize,
   })
+  const selectedSizeObject = sizes.find((size) => size.id === selectedSize) ?? null
 
-  const handleAdd = () =>
+  const handleAdd = () => {
+    setTouched(true)
+    if (!selectedSizeObject) return
     addToCart({
-      product,
-      selectedColor,
-      selectedSize,
-      setTouched,
+      productId: product.id,
+      productNameAtAdd: product.name,
+      productBrandAtAdd: product.brand,
+      color: selectedColor,
+      size: selectedSizeObject,
     })
+  }
 
   useEffect(() => {
     setTouched(false)
