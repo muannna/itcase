@@ -1,7 +1,5 @@
-import { useProducts } from '../../queries/products/useProducts'
+import { useProductsViewModel } from '../../hooks/useProductsViewModel'
 import { Filters } from './components/filters/Filters'
-import { selectVisibleProducts } from '../../utils/products/selectVisibleProducts'
-import { useFilters } from '../../hooks/useFilters'
 import { Loader } from '../../shared/ui/loader/Loader'
 import { Error } from '../../shared/ui/error/Error'
 import { ProductsPageContent } from './ProductsPageContent'
@@ -9,12 +7,8 @@ import { ProductsPageContent } from './ProductsPageContent'
 import styles from './ProductsPage.module.css'
 
 export function ProductsPage() {
-  const { data: products = [], isLoading, error } = useProducts()
-  const { filters, updateFilter } = useFilters()
-
-  const sortedProducts = selectVisibleProducts(products, filters)
-  const canShowFilters = !error
-
+  const { isLoading, error, canShowFilters, products, sortedProducts, filters, updateFilter } =
+    useProductsViewModel()
   let content = null
 
   if (isLoading) {

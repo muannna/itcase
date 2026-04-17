@@ -9,12 +9,12 @@ export function useProductParams(product) {
   const { selectedColor, selectedSize } = deriveProductState(product, searchParams)
 
   useEffect(() => {
-    const { newParams, changed } = normalizeParams(product, searchParams)
+    const { newParams, changed } = normalizeParams(product, searchParams, selectedColor)
 
     if (changed) {
       setSearchParams(newParams, { replace: true })
     }
-  }, [product, searchParams, setSearchParams])
+  }, [product, searchParams, setSearchParams, selectedColor])
 
   const setColor = (colorId) => {
     const newParams = new URLSearchParams(searchParams)
