@@ -18,7 +18,7 @@ export const saveCart = (cart) => {
 
 export const loadPromo = () => {
   const rawData = localStorage.getItem(PROMO_KEY)
-  if (!rawData) return []
+  if (!rawData) return null
   try {
     const parsedData = JSON.parse(rawData)
     return parsedData ? parsedData : null
