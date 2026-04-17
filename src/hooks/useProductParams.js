@@ -6,12 +6,6 @@ import { deriveProductState } from '../utils/deriveProductState'
 export function useProductParams(product) {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const updateParams = (updater) => {
-    const newParams = new URLSearchParams(searchParams)
-    updater(newParams)
-    setSearchParams(newParams, { replace: true })
-  }
-
   const { selectedColor, selectedSize } = deriveProductState(product, searchParams)
 
   useEffect(() => {
@@ -23,15 +17,15 @@ export function useProductParams(product) {
   }, [product, searchParams, setSearchParams])
 
   const setColor = (colorId) => {
-    updateParams((newParams) => {
-      newParams.set('color', colorId)
-    })
+    const newParams = new URLSearchParams(searchParams)
+    newParams.set('color', colorId)
+    setSearchParams(newParams, { replace: true })
   }
 
   const setSize = (sizeId) => {
-    updateParams((newParams) => {
-      newParams.set('size', sizeId)
-    })
+    const newParams = new URLSearchParams(searchParams)
+    newParams.set('size', sizeId)
+    setSearchParams(newParams, { replace: true })
   }
 
   return {
