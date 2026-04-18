@@ -1,13 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { loadCart, loadPromo, clearPromoStorage } from './cartStorage'
 import { PROMO_CODES } from '../../../shared/config/promoCodes'
-import {
-  createCartItemIdHelper,
-  findItemHelper,
-  removeItemHelper,
-  increaseQuantityHelper,
-  decreaseQuantityHelper,
-} from './cartHelpers'
+import { createCartItemIdHelper, findItemHelper, removeItemHelper } from './cartHelpers'
 
 const initialState = {
   items: loadCart(),
@@ -30,7 +24,7 @@ const cartSlice = createSlice({
       const existing = findItemHelper(state, id)
 
       if (existing) {
-        increaseQuantityHelper(existing)
+        existing.quantity += 1
         return
       }
 
@@ -45,14 +39,16 @@ const cartSlice = createSlice({
       const id = action.payload
       const item = findItemHelper(state, id)
 
-      if (item) increaseQuantityHelper(item)
+      if (!item) return
+      item.quantity += 1
     },
 
     decrementItemQuantity: (state, action) => {
       const id = action.payload
       const item = findItemHelper(state, id)
 
-      if (item) decreaseQuantityHelper(item)
+      if (!item || item.quantity <= 1) return
+      item.quantity -= 1
     },
 
     removeItem: (state, action) => {

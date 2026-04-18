@@ -6,7 +6,7 @@
 .selectWrapper::after {
   content: '▾';
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
@@ -14,7 +14,7 @@
 }
 
 .select {
-  width: 100%;
+  width: 150px;
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid var(--color-black01);
